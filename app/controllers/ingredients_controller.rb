@@ -26,7 +26,12 @@ class IngredientsController < ApplicationController
 
   # PATCH/PUT /ingredients/1
   def update
-    if @ingredient.update(ingredient_params)
+    if params[:burger_id]
+      burger = Burger.find(params[:burger_id])
+      burger.ingredients << ingredient_path(params[:id])
+      render json: @ingredient
+
+    elsif @ingredient.update(ingredient_params)
       render json: @ingredient
     else
       render json: @ingredient.errors, status: :unprocessable_entity
@@ -35,10 +40,19 @@ class IngredientsController < ApplicationController
 
   # DELETE /ingredients/1
   def destroy
-    @ingredient.destroy
+    if params[:burger_id]
+      burger = Burger.find(params[:burger_id])
+      burger.ingredient.destroy
+    else
+      @ingredient.destroy
+    end
   end
 
   private
+
+  #  def get_burger
+  #    @burger = Burger.find(params[:burger_id])
+  #  end
     # Use callbacks to share common setup or constraints between actions.
     def set_ingredient
       @ingredient = Ingredient.find(params[:id])
