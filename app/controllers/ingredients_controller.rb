@@ -4,13 +4,11 @@ class IngredientsController < ApplicationController
   # GET /ingredients
   def index
     @ingredients = Ingredient.all
-
-    render json: @ingredients
   end
 
   # GET /ingredients/1
   def show
-    render json: @ingredient
+    @ingredient
   end
 
   # POST /ingredients
@@ -18,7 +16,7 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.new(ingredient_params)
 
     if @ingredient.save
-      render json: @ingredient, status: :created, location: @ingredient
+      render 'show.json'
     else
       render json: @ingredient.errors, status: :unprocessable_entity
     end
@@ -27,9 +25,9 @@ class IngredientsController < ApplicationController
   # PATCH/PUT /ingredients/1
   def update
     if params[:burger_id]
-      burger = Burger.find(params[:burger_id])
-      burger.ingredients << @ingredient
-      render json: @ingredient
+      @burger = Burger.find(params[:burger_id])
+      @burger.ingredients << @ingredient
+      #render 'burger.json'
 
     elsif @ingredient.update(ingredient_params)
       render json: @ingredient
@@ -41,8 +39,8 @@ class IngredientsController < ApplicationController
   # DELETE /ingredients/1
   def destroy
     if params[:burger_id]
-      burger = Burger.find(params[:burger_id])
-      burger.ingredients.delete(@ingredient)
+      @burger = Burger.find(params[:burger_id])
+      @burger.ingredients.delete(@ingredient)
     else
       @ingredient.destroy
     end

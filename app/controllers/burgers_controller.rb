@@ -5,8 +5,6 @@ class BurgersController < ApplicationController
   # GET /burgers
   def index
     @burgers = Burger.all
-
-    render json: @burgers
   end
 
   # GET /burgers/1
@@ -19,7 +17,7 @@ class BurgersController < ApplicationController
     @burger = Burger.new(burger_params)
 
     if @burger.save
-      render json: @burger, status: :created, location: @burger
+      render "show.json"
     else
       render json: @burger.errors, status: :unprocessable_entity
     end
@@ -28,7 +26,7 @@ class BurgersController < ApplicationController
   # PATCH/PUT /burgers/1
   def update
     if @burger.update(burger_params)
-      render json: @burger
+      render "show.json"
     else
       render json: @burger.errors, status: :unprocessable_entity
     end
