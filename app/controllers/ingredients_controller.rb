@@ -28,7 +28,7 @@ class IngredientsController < ApplicationController
   def update
     if params[:burger_id]
       burger = Burger.find(params[:burger_id])
-      burger.ingredients << ingredient_path(params[:id])
+      burger.ingredients << @ingredient
       render json: @ingredient
 
     elsif @ingredient.update(ingredient_params)
@@ -42,7 +42,7 @@ class IngredientsController < ApplicationController
   def destroy
     if params[:burger_id]
       burger = Burger.find(params[:burger_id])
-      burger.ingredient.destroy
+      burger.ingredients.delete(@ingredient)
     else
       @ingredient.destroy
     end
@@ -60,6 +60,7 @@ class IngredientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def ingredient_params
-      params.require(:ingredient).permit(:name, :description)
+      params.tap { |p| p[:name] = p[:nombre];
+        p[:description] = p[:descripcion]}.permit(:name, :description)
     end
 end

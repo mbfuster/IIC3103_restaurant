@@ -1,4 +1,5 @@
 class BurgersController < ApplicationController
+  alias_attribute :nombre, :name
   before_action :set_burger, only: [:show, :update, :destroy]
 
   # GET /burgers
@@ -10,7 +11,7 @@ class BurgersController < ApplicationController
 
   # GET /burgers/1
   def show
-    render json: @burger
+    @burger
   end
 
   # POST /burgers
@@ -46,6 +47,9 @@ class BurgersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def burger_params
-      params.require(:burger).permit(:name, :price, :description, :image)
+      params.tap { |p| p[:name] = p[:nombre];
+        p[:price] = p[:precio];
+        p[:description] = p[:descripcion];
+        p[:image] = p[:imagen]}.permit(:name, :price, :description, :image)
     end
 end
