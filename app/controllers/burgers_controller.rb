@@ -25,7 +25,7 @@ class BurgersController < ApplicationController
 
   # PATCH/PUT /burgers/1
   def update
-    if @burger.update(burger_params)
+    if @burger.update(update_burger_params)
       render "show.json"
     else
       render json: @burger.errors, status: :unprocessable_entity
@@ -45,9 +45,31 @@ class BurgersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def burger_params
-      params.tap { |p| p[:name] = p[:nombre];
-        p[:price] = p[:precio];
-        p[:description] = p[:descripcion];
-        p[:image] = p[:imagen]}.permit(:name, :price, :description, :image)
+
+#      params.tap { |p| p[:name] = p[:nombre];
+#        p[:price] = p[:precio];
+#        p[:description] = p[:descripcion];
+#        p[:image] = p[:imagen]}.permit(:name, :price, :description, :image)
+      dict = params.permit(:nombre, :precio, :descripcion, :imagen)
+      mapping = {nombre: :name, precio: :price, descripcion: :description, imagen: :image}
+      dict.transform_keys { |key| mappings[key] }
+    end
+
+    def update_burger_params
+      new_params = {}
+      if params[:precio]
+        new_params[:price]=params[:precio]
+      end
+      if params[:nombre]
+        new_params[:name]=params[:nombre]
+      end
+      if params[:descripcion]
+        new_params[:description]=params[:descripcion]
+      end
+      if params[:imagen]
+        new_params[:image]=params[:imagen]
+      end
+      #new_params.permit(:name, :price, :description, :image)
+      new_params
     end
 end
