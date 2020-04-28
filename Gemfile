@@ -24,6 +24,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'jbuilder'
 
+gem 'validate_url'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 

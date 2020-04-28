@@ -46,13 +46,11 @@ class BurgersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def burger_params
 
-#      params.tap { |p| p[:name] = p[:nombre];
-#        p[:price] = p[:precio];
-#        p[:description] = p[:descripcion];
-#        p[:image] = p[:imagen]}.permit(:name, :price, :description, :image)
-      dict = params.permit(:nombre, :precio, :descripcion, :imagen)
-      mapping = {nombre: :name, precio: :price, descripcion: :description, imagen: :image}
-      dict.transform_keys { |key| mappings[key] }
+      params.tap { |p| p[:name] = p[:nombre];
+        p[:price] = p[:precio];
+        p[:description] = p[:descripcion];
+        p[:image] = p[:imagen]}.permit(:name, :price, :description, :image)
+
     end
 
     def update_burger_params
