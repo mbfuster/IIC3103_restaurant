@@ -1,25 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Bienvenidos a FustersBurgers! API para consumir informacion sobre hamburguesas y sus ingredientes. (formato y alcances https://app.swaggerhub.com/apis-docs/Snorlax8/Burguer/1.0.0#/developers/editarHamburguesa)
 
-Things you may want to cover:
+link: https://fustersburgers.herokuapp.com/
 
-* Ruby version
+Versiones y dependencies:
 
-* System dependencies
+* Ruby 2.5.7p206
 
-* Configuration
+* Rails 6.0.2.2
 
-* Database creation
+* PostgreSQL 10.12
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # IIC3103_restaurant
