@@ -42,7 +42,7 @@ class IngredientsController < ApplicationController
   # DELETE /ingredients/1
   def destroy
     if params[:burger_id]
-      if params[:id].to_i != 0
+      if params[:burger_id].to_i != 0
         @burger = Burger.find(params[:burger_id])
         @burger.ingredients.delete(@ingredient)
         render json: "ingrediente retirado", status: :ok
