@@ -54,6 +54,8 @@ class IngredientsController < ApplicationController
         render json: "Ingrediente no se puede borrar, se encuentra presente en una hamburguesa", status: :conflict
       else
         @ingredient.destroy
+        render json: "Ingrediente eliminado", status: :ok
+
       end
     end
   end

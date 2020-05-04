@@ -35,6 +35,7 @@ class BurgersController < ApplicationController
   # DELETE /burgers/1
   def destroy
     @burger.destroy
+    render json: "hamburguesa eliminada", status: :ok
   end
 
   private
