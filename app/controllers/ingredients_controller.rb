@@ -16,7 +16,7 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.new(ingredient_params)
 
     if @ingredient.save
-      render 'show.json'
+      render 'show.json', status: :created
     else
       render json: @ingredient.errors, status: :unprocessable_entity
     end
@@ -67,6 +67,7 @@ class IngredientsController < ApplicationController
     def set_ingredient
       if params[:id].to_i != 0
         @ingredient = Ingredient.find(params[:id])
+
       else
         render json: "id invalido", status: :bad_request
       end
