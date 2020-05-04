@@ -44,8 +44,8 @@ class IngredientsController < ApplicationController
     if params[:burger_id]
       if params[:id].to_i != 0
         @burger = Burger.find(params[:burger_id])
-        @burger.ingredients.delete(@ingredient) 
-        render json: "ingrediente retirado", status: :created
+        @burger.ingredients.delete(@ingredient)
+        render json: "ingrediente retirado", status: :ok
       else
         render json: "Id de hamburguesa inválido", status: :bad_request
       end
