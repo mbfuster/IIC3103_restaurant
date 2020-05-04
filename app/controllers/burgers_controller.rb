@@ -28,7 +28,7 @@ class BurgersController < ApplicationController
     if @burger.update(update_burger_params)
       render "show.json"
     else
-      render json: @burger.errors, status: :unprocessable_entity
+      render json: @burger.errors, status: :bad_request
     end
   end
 
@@ -40,7 +40,11 @@ class BurgersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_burger
-      @burger = Burger.find(params[:id])
+      if params[:id].to_i != 0
+        @burger = Burger.find(params[:id])
+      else
+        render json: "id invalido", status: :bad_request
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
