@@ -19,7 +19,7 @@ class BurgersController < ApplicationController
     if @burger.save
       render "show.json", status: :created
     else
-      render json: @burger.errors, status: :unprocessable_entity
+      render json: @burger.errors, status: :bad_request
     end
   end
 

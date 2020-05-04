@@ -18,7 +18,7 @@ class IngredientsController < ApplicationController
     if @ingredient.save
       render 'show.json', status: :created
     else
-      render json: @ingredient.errors, status: :unprocessable_entity
+      render json: @ingredient.errors, status: :bad_request
     end
   end
 
